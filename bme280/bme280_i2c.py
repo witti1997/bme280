@@ -3,7 +3,7 @@
 import warnings
 
 try:
-    import smbus
+    import smbus2 as smbus
 except ImportError:
     warnings.warn('smbus is not available, you will not be able to use i2c', ImportWarning)
     smbus = None
