@@ -12,9 +12,6 @@ readme = """
 For installation instructions see https://github.com/kbrownlees/bme280/blob/master/README.rst
 """
 
-#with open('HISTORY.rst') as history_file:
-   # history = history_file.read().replace('.. :changelog:', '')
-
 requirements = [
     # TODO: put package requirements here
 ]
@@ -27,7 +24,7 @@ setup(
     name='bme280',
     version='0.6',
     description="Python Driver for the BME280 Temperature/Pressure/Humidity Sensor from Bosch.",
-    long_description=readme + '\n\n' + history,
+    long_description=readme + '\n\n',
     author="Kieran Brownlees",
     author_email='kieran@mootium.co',
     url='https://github.com/kbrownlees/bme280',
