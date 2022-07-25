@@ -12,8 +12,8 @@ readme = """
 For installation instructions see https://github.com/kbrownlees/bme280/blob/master/README.rst
 """
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read().replace('.. :changelog:', '')
+#with open('HISTORY.rst') as history_file:
+   # history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
     # TODO: put package requirements here
