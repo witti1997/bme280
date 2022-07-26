@@ -33,6 +33,7 @@ def reset_calibration():
 def populate_calibration_data():
     raw_data = []
 
+#Kalibrierdaten aus Datenbaltt 4.2.2 aus den Registern lesen
     for i in range(0x88, 0x88 + 24):
         raw_data.append(bme280_i2c.read_byte_data(i))
     raw_data.append(bme280_i2c.read_byte_data(0xA1))
@@ -70,7 +71,7 @@ def populate_calibration_data():
         if calibration_h[i] & 0x8000:
             calibration_h[i] = (-calibration_h[i] ^ 0xFFFF) + 1
 
-
+#Rohdaten lesen
 def read_adc():
     data = []
     for i in range(0xF7, 0xF7 + 8):
@@ -108,14 +109,14 @@ def read_pressure(data=None):
     read_temperature(data)
     return compensate_pressure(data.pressure)
 
-
+#Aus Rohdaten Temperatur ziehen und dann mittels Compensationsfunktion berechnen
 def read_temperature(data=None):
     if data is None:
         data = read_adc()
 
     return compensate_temperature(data.temperature)
 
-
+#Daten mittels Berechnung aus Datenblatt kompensieren
 def compensate_pressure(adc_p):
     v1 = (t_fine / 2.0) - 64000.0
     v2 = (((v1 / 4.0) * (v1 / 4.0)) / 2048) * calibration_p[5]
@@ -139,7 +140,7 @@ def compensate_pressure(adc_p):
 
     return pressure / 100
 
-
+#Daten mittels Berechnung aus Datenblatt kompensieren
 def compensate_temperature(adc_t):
     global t_fine
     v1 = (adc_t / 16384.0 - calibration_t[0] / 1024.0) * calibration_t[1]
@@ -148,7 +149,7 @@ def compensate_temperature(adc_t):
     temperature = t_fine / 5120.0
     return temperature
 
-
+#Daten mittels Berechnung aus Datenblatt kompensieren
 def compensate_humidity(adc_h):
     var_h = t_fine - 76800.0
     if var_h == 0:
